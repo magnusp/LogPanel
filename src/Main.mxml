@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication  xmlns:fx="http://ns.adobe.com/mxml/2009"
+						xmlns:s="library://ns.adobe.com/flex/spark"
+						xmlns:mx="library://ns.adobe.com/flex/halo"
+						xmlns:component="github.c0dem4gnetic.view.component.*"
+						frameRate="30"
+						width="800" height="400"
+						invoke="onInvoke(event)">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+
+	
+	<fx:Style source="style.css"/>
+
+	<fx:Script><![CDATA[
+		import github.c0dem4gnetic.ApplicationFacade;
+
+		public static const NAME:String = 'RoarClient';
+		protected var facade:ApplicationFacade = ApplicationFacade.getInstance(NAME);
+
+		public static var ARGS:Dictionary = new Dictionary();
+		private static var hasInvoked:Boolean = false;
+		public function setStatus(text:String):void {
+			this.status = text;
+		}
+
+		protected function onInvoke(event:InvokeEvent):void
+		{
+			if(!hasInvoked) {
+				hasInvoked=true;
+				for each(var arg:String in event.arguments) {
+					var pair:Array = arg.split("=");
+					Main.ARGS[pair[0]]=pair[1];
+				}
+				facade.startup(this);
+			}
+			
+		}
+
+	]]></fx:Script>
+	<component:LogPanel id="logPanel"/>
+</s:WindowedApplication>

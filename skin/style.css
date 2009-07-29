@@ -1,0 +1,24 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/halo";
+
+mx|DataGrid
+{
+	columnResizeSkin: ClassReference("WeakSquareSkin");
+	borderSkin: Embed(source="assets/DataGrid_borderSkin.png");
+	verticalGridLines: false;
+	headerBackgroundSkin: ClassReference("PlainBarSkin");
+	alternatingItemColors: #ffffff, #ffffff;
+}
+
+mx|Panel
+{
+	borderSkin: Embed(source="assets/Panel_borderSkin.png",scaleGridLeft="4",scaleGridTop="31",scaleGridRight="268",scaleGridBottom="188");
+}
+
+global
+{
+	focusColor: #B5BAC4;
+	selectionColor: #5D636E;
+	rollOverColor: #E2E4E6;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/halo" height="100%" width="100%" layout="absolute">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.XMLListCollection;
+			import mx.utils.ObjectProxy;
+			import mx.events.DataGridEvent;
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			public var logEntries:XMLListCollection = new XMLListCollection();
+			
+			private function tsSorter(logEntry1:XML, logEntry2:XML):int {
+				var ts1:int = int(logEntry1.@ts);
+				var ts2:int = int(logEntry2.@ts);
+				if(ts1==ts2)
+					return 0;
+				
+				return ts1>ts2 ? -1 : 1;
+			}
+			
+			private function onCreationComplete(event:Event):void {
+				
+				event.target.dispatchEvent(new DataGridEvent(DataGridEvent.HEADER_RELEASE,
+			false,
+			true,
+			0,	
+			null,
+			0,
+			null,
+			null,
+			0));
+				
+			}
+			
+		]]>
+	</fx:Script>
+
+	<mx:Label text="MESSAGES" fontWeight="bold" fontSize="11" top="8" left="2"/>
+	<mx:DataGrid creationComplete="onCreationComplete(event)" id="dgMessages" dataProvider="{logEntries}" verticalGridLineColor="0xFFFFFF" doubleClickEnabled="true" left="5" top="32" right="5" bottom="5"  x="0" y="24">
+		<mx:columns>
+			<mx:DataGridColumn  headerText="Time" dataField="logentry" width="120" sortCompareFunction="tsSorter">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('datetime')}" />
+						</mx:HBox>
+					</fx:Component>			
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="Category" dataField="logentry" width="120">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('category')}"/>
+						</mx:HBox>
+					</fx:Component>			
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="Level" dataField="logentry.@level" width="120">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('level')}"/>
+						</mx:HBox>
+					</fx:Component>			
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="Message" dataField="logentry">
+				<mx:itemRenderer>
+					<fx:Component>
+						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.text()}" width="100%"/>
+						</mx:HBox>
+					</fx:Component>			
+				</mx:itemRenderer>
+			</mx:DataGridColumn>
+		</mx:columns>
+	</mx:DataGrid>
+	
+</mx:Panel>
