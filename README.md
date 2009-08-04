@@ -55,6 +55,7 @@ External dependencies
 
    - [as3-stomp](http://code.google.com/p/as3-stomp/)
    - [PureMVC MultiCore](http://trac.puremvc.org/PureMVC_AS3_MultiCore)
+   - [PureMVC XML Database Utility](http://trac.puremvc.org/Utility_AS3_AIR_XMLDatabase)
 
 Currently Flash Builder beta, build 234740, is being used to build the binary
 distribution. The git repository is based from a Flash Builder workspace that
@@ -83,7 +84,7 @@ src directory.
 ## Client implementors ##
 
 Log messages are by default read from the topic "logpanel". Logging clients
-should format their messages as the following example demonstrates:
+should format their messages as the following snippet demonstrates:
 
 	<?xml version='1.0'?>
 	<logentries>

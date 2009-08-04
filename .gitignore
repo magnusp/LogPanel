@@ -3,4 +3,5 @@
 *.kpf
 external/*
 bin-debug
+bin-release
 *.air

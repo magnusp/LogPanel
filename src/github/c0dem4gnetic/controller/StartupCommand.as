@@ -1,5 +1,6 @@
 package github.c0dem4gnetic.controller
 {
+	import github.c0dem4gnetic.model.ConfigProxy;
 	import github.c0dem4gnetic.model.StompProxy;
 	import github.c0dem4gnetic.view.LogPanelMediator;
 	
@@ -13,20 +14,10 @@ package github.c0dem4gnetic.controller
 		{
 			var app:Main = note.getBody() as Main;
 
-			facade.registerMediator(new LogPanelMediator(app.logPanel));
-			
+			facade.registerProxy(new ConfigProxy());
 			facade.registerProxy(new StompProxy());
-			/*facade.registerCommand(SyncCommand.REGISTER, SyncCommand);
-			facade.registerCommand(StratusProxy.STRATUSCONNECTED, StratusCommand);
-			
-			facade.registerProxy(new UserMappingProxy());
-			facade.registerProxy(new DjangoProxy());	
-			facade.registerProxy(new StratusProxy());
-			
-			facade.registerMediator(new ApplicationMediator(app));
-			facade.registerMediator(new ChatMediator(app.chat));*/
-			
-		
+
+			facade.registerMediator(new LogPanelMediator(app.logPanel));
 		}
 	}
 }

@@ -2,6 +2,7 @@
 <mx:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/halo" height="100%" width="100%" layout="absolute">
 	<fx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
 			import mx.collections.XMLListCollection;
 			import mx.utils.ObjectProxy;
 			import mx.events.DataGridEvent;
@@ -20,30 +21,22 @@
 			}
 			
 			private function onCreationComplete(event:Event):void {
-				
-				event.target.dispatchEvent(new DataGridEvent(DataGridEvent.HEADER_RELEASE,
-			false,
-			true,
-			0,	
-			null,
-			0,
-			null,
-			null,
-			0));
-				
+				var sortEvent:DataGridEvent = new DataGridEvent(DataGridEvent.HEADER_RELEASE, false, true, 0, null,	0, null, null,	0);
+				event.target.dispatchEvent(sortEvent);
 			}
-			
 		]]>
+		
+		
 	</fx:Script>
 
 	<mx:Label text="MESSAGES" fontWeight="bold" fontSize="11" top="8" left="2"/>
 	<mx:DataGrid creationComplete="onCreationComplete(event)" id="dgMessages" dataProvider="{logEntries}" verticalGridLineColor="0xFFFFFF" doubleClickEnabled="true" left="5" top="32" right="5" bottom="5"  x="0" y="24">
 		<mx:columns>
-			<mx:DataGridColumn  headerText="Time" dataField="logentry" width="120" sortCompareFunction="tsSorter">
+			<mx:DataGridColumn  headerText="Time" dataField="logentry" width="120" sortCompareFunction="tsSorter" >
 				<mx:itemRenderer>
 					<fx:Component>
-						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
-							<mx:Label text="{data.attribute('datetime')}" />
+						<mx:HBox backgroundColor="{data.attribute('rowcolor')}" doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('datetime')}" color="{data.attribute('textcolor')}" />
 						</mx:HBox>
 					</fx:Component>			
 				</mx:itemRenderer>
@@ -51,8 +44,8 @@
 			<mx:DataGridColumn headerText="Category" dataField="logentry" width="120">
 				<mx:itemRenderer>
 					<fx:Component>
-						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
-							<mx:Label text="{data.attribute('category')}"/>
+						<mx:HBox backgroundColor="{data.attribute('rowcolor')}" doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('category')}" color="{data.attribute('textcolor')}"/>
 						</mx:HBox>
 					</fx:Component>			
 				</mx:itemRenderer>
@@ -60,8 +53,8 @@
 			<mx:DataGridColumn headerText="Level" dataField="logentry.@level" width="120">
 				<mx:itemRenderer>
 					<fx:Component>
-						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
-							<mx:Label text="{data.attribute('level')}"/>
+						<mx:HBox backgroundColor="{data.attribute('rowcolor')}" doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.attribute('level')}" color="{data.attribute('textcolor')}"/>
 						</mx:HBox>
 					</fx:Component>			
 				</mx:itemRenderer>
@@ -69,8 +62,8 @@
 			<mx:DataGridColumn headerText="Message" dataField="logentry">
 				<mx:itemRenderer>
 					<fx:Component>
-						<mx:HBox doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
-							<mx:Label text="{data.text()}" width="100%"/>
+						<mx:HBox backgroundColor="{data.attribute('rowcolor')}" doubleClickEnabled="true" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+							<mx:Label text="{data.text()}" color="{data.attribute('textcolor')}" width="100%"/>
 						</mx:HBox>
 					</fx:Component>			
 				</mx:itemRenderer>

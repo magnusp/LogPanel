@@ -5,6 +5,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="skin"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="external/PureMVC_AS3_MultiCore/src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="external/as3-stomp"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="external/Utility_AS3_AIR_XMLDatabase"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path=""/>
